@@ -11,7 +11,7 @@
     active-text-color="#ffd04b"
   >
     <!-- 标题 -->
-    <h3>通用后台管理系统</h3>
+    <h3>{{ isCollapse ? '后台' : '通用后台管理系统' }}</h3>
     <!-- 没有子菜单的选项 -->
     <el-menu-item
       v-for="item in noChildren"
@@ -54,7 +54,7 @@ export default {
       console.log(key, keyPath);
     },
     clickMenu(item) {
-      console.log(item.name);
+      // console.log(item.name);
       this.$router.push({
         name: item.name,
       });
@@ -68,7 +68,8 @@ export default {
       return this.menuData.filter((item) => item.children);
     },
     isCollapse() {
-      return this.$store.state.tab.collapseMenu
+      // console.log('isCollapse' + this.$store.state.tab.collapseMenu)
+      return this.$store.state.tab.isCollapse
     }
   },
 };
@@ -84,9 +85,10 @@ export default {
   height: 100%;
   border: none;
   text-align: start;
+  min-width: 80px;
   h3 {
     color: #fff;
-    padding: 0 15px;
+    padding: 15px;
   }
 }
 </style>

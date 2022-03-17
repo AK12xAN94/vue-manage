@@ -5,8 +5,8 @@ import router from './router'
 import App from './App.vue'
 import store from './store'
 
-import './style/index.less'
-// import './assets/less/index.less'
+import './assets/less/index.less'
+
 
 Vue.use(ElementUI);
 

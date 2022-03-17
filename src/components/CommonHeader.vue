@@ -28,7 +28,7 @@ export default {
   },
   methods: {
       handleMenu() {
-          console.log(this.$store.state.tab.collapseMenu)
+        //   console.log(this.$store.state.tab.collapseMenu)
           this.$store.commit('collapseMenu')
       }
   },
@@ -54,6 +54,7 @@ header {
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        transform: translate(25%,25%);
     }
 }
 </style>
