@@ -4,11 +4,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 import App from './App.vue'
 import store from './store'
+import http from 'axios';
 
 import './assets/less/index.less'
 
 
 Vue.use(ElementUI);
+
+Vue.prototype.$http = http
 
 Vue.config.productionTip = false
 
