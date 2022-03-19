@@ -5,6 +5,7 @@ import router from './router'
 import App from './App.vue'
 import store from './store'
 import http from 'axios';
+import'./api/mock.js'
 
 import './assets/less/index.less'
 

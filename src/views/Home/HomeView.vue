@@ -44,26 +44,41 @@
           </div>
         </el-card>
       </div>
-      <el-card style="height: 280px"></el-card>
+      <el-card style="height: 280px">
+        <!-- <div style="height: 280px" ref="echarts"></div> -->
+        <common-echarts :chartData="this.echartData.order" style="height: 280px"></common-echarts>
+      </el-card>
       <div class="graph">
-        <el-card style="height: 260px"></el-card>
-        <el-card style="height: 260px"></el-card>
+        <el-card style="height: 260px">
+          <!-- <div style="height: 240px" ref="userEcharts"></div> -->
+          <common-echarts :chartData="this.echartData.user" style="height: 240px"></common-echarts>
+        </el-card>
+        <el-card style="height: 260px">
+          <!-- <div style="height: 240px" ref="videoEcharts"></div> -->
+          <common-echarts :chartData="this.echartData.video" :isAxisChart="false" style="height: 240px"></common-echarts>
+        </el-card>
       </div>
     </el-col>
   </el-row>
 </template>
 
 <script>
-import data from "../../data/TableData.js";
+// import data from "../../data/TableData.js";
 import cData from "../../data/CountData.js";
-import { getMenu } from '../../api/data.js'
+import { getData } from "../../api/data.js";
+// import * as echarts from "echarts";
+
+import CommonEcharts from '../../components/CommonEcharts.vue'
 
 export default {
   name: "HomeView",
+  components: {
+    CommonEcharts,
+  },
   data() {
     return {
       userImg: require("../../assets/images/user.png"),
-      tableData: data,
+      tableData: [],
       tableLabel: {
         name: "课程",
         todayBuy: "今日购买",
@@ -71,12 +86,68 @@ export default {
         totalBuy: "总共购买",
       },
       countData: cData,
+      echartData: {
+        order: {
+          xData: [],
+          series: [],
+        },
+        user: {
+          xData: [],
+          series: [],
+        },
+        video: {
+          series: [],
+        }
+      }
     };
   },
   mounted() {
-    getMenu().then(res => {
-      console.log(res)
-    })
+    getData().then((res) => {
+      console.log(res);
+      const { code, data } = res.data;
+      if (code === 20000) {
+        this.tableData = data.tableData;
+
+        //初始化echart
+        const order = data.orderData;
+        const xData = order.date;
+        const keyArray = Object.keys(order.data[0]);
+        const series = [];
+        keyArray.forEach((key) => {
+          series.push({
+            name: key,
+            data: order.data.map((item) => item[key]),
+            type: "line",
+          });
+        });
+
+        //配置echart数据
+        //线段图
+        this.echartData.order.xData = xData
+        this.echartData.order.series = series
+        //柱状图
+        this.echartData.user.xData = data.userData.map((item) => item.date)
+        this.echartData.user.series = [
+            {
+              name: "新增用户",
+              data: data.userData.map((item) => item.new),
+              type: "bar",
+            },
+            {
+              name: "活跃用户",
+              data: data.userData.map((item) => item.active),
+              type: "bar",
+            },
+          ]
+        //饼图  
+        this.echartData.video.series = [
+            {
+              data: data.videoData,
+              type: 'pie', 
+            }
+          ]
+      }
+    });
   },
 };
 </script>
