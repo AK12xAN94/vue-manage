@@ -11,7 +11,7 @@
     active-text-color="#ffd04b"
   >
     <!-- 标题 -->
-    <h3>{{ isCollapse ? '后台' : '通用后台管理系统' }}</h3>
+    <h3>{{ isCollapse ? "后台" : "通用后台管理系统" }}</h3>
     <!-- 没有子菜单的选项 -->
     <el-menu-item
       v-for="item in noChildren"
@@ -30,7 +30,9 @@
         <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group v-for="subItem in item.children" :key="subItem.path">
-        <el-menu-item :index="subItem.path">{{ subItem.name }}</el-menu-item>
+        <el-menu-item @click="clickMenu(subItem)" :index="subItem.path">{{
+          subItem.name
+        }}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -58,6 +60,7 @@ export default {
       this.$router.push({
         name: item.name,
       });
+      this.$store.commit('selectMenu',item)
     },
   },
   computed: {
@@ -69,8 +72,8 @@ export default {
     },
     isCollapse() {
       // console.log('isCollapse' + this.$store.state.tab.collapseMenu)
-      return this.$store.state.tab.isCollapse
-    }
+      return this.$store.state.tab.isCollapse;
+    },
   },
 };
 </script>

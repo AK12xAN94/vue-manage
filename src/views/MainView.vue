@@ -9,6 +9,8 @@
         <el-header>
           <common-header></common-header>
         </el-header>
+        <!-- Tag区域 -->
+        <common-tag></common-tag>
         <!-- 主体区域 -->
         <el-main>
           <router-view></router-view>
@@ -21,12 +23,14 @@
 
 import CommonAside from '../components/CommonAside.vue'
 import CommonHeader from '../components/CommonHeader.vue'
+import CommonTag from '../components/CommonTag.vue'
 
 export default {
   name: "MainView",
   components: {
     CommonAside,
     CommonHeader,
+    CommonTag
   },
   data() {
     return {

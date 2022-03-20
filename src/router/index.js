@@ -21,6 +21,21 @@ const routes = [
                 name: 'user',
                 component: () => import('../views/User/UserView.vue')
             },
+            {
+                path: '/mall',
+                name: 'mall',
+                component: () => import('../views/Mall/MallView.vue')
+            },
+            {
+                path: '/page1',
+                name: 'page1',
+                component: () => import('../views/Other/PageOneView.vue')
+            },
+            {
+                path: '/page2',
+                name: 'page2',
+                component: () => import('../views/Other/PageTwoView.vue')
+            },
         ]
     },
     
