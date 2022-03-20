@@ -1,6 +1,8 @@
 <template>
   <el-row class="home" :gutter="20">
+    <!-- 用户信息&销量 -->
     <el-col :span="8" style="margin-top: 20px">
+      <!-- 用户信息 -->
       <el-card shadow="hover">
         <div class="user">
           <img :src="userImg" />
@@ -14,6 +16,7 @@
           <p>上次登录地点： <span>广州</span></p>
         </div>
       </el-card>
+      <!-- 销量 -->
       <el-card style="margin-top: 20px; height: 460px">
         <el-table :data="tableData">
           <el-table-column
@@ -25,13 +28,15 @@
           </el-table-column>
         </el-table>
       </el-card>
+      <!-- 订单信息&销售情况 -->
     </el-col>
     <el-col style="margin-top: 20px" :span="16">
+      <!-- 订单数量 -->
       <div class="num">
         <el-card
           v-for="item in countData"
           :key="item.name"
-          :body-style="{ display: flex, padding: 0 }"
+          :body-style="{ display: flex, padding: 0}"
         >
           <i
             class="icon"
@@ -44,10 +49,12 @@
           </div>
         </el-card>
       </div>
+      <!-- 折线图 -->
       <el-card style="height: 280px">
         <!-- <div style="height: 280px" ref="echarts"></div> -->
         <common-echarts :chartData="this.echartData.order" style="height: 280px"></common-echarts>
       </el-card>
+      <!-- 柱状图&饼图 -->
       <div class="graph">
         <el-card style="height: 260px">
           <!-- <div style="height: 240px" ref="userEcharts"></div> -->
