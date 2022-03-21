@@ -27,10 +27,10 @@
         v-model="form[item.model]"
       >
         <el-option
-          v-for="item in item.opts"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="i in item.opts"
+          :key="i.value"
+          :label="i.label"
+          :value="i.value"
         ></el-option>
       </el-select>
     </el-form-item>
@@ -42,15 +42,25 @@
 export default {
   name: "CommonForm",
   props: {
+    // 表单内容选项
     formLabel: Array,
-    form: Object,
+    // 表单内容数据
+    myForm: Object,
+    // 行内表单模式
     inline: Boolean,
   },
   data() {
-    return {};
+    return {
+      form: this.myForm,
+    };
   },
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.el-form-item {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
 </style>
