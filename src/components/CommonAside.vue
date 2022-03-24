@@ -65,15 +65,18 @@ export default {
   },
   computed: {
     noChildren() {
-      return this.menuData.filter((item) => !item.children);
+      return this.asyncMenu.filter((item) => !item.children);
     },
     hasChildren() {
-      return this.menuData.filter((item) => item.children);
+      return this.asyncMenu.filter((item) => item.children);
     },
     isCollapse() {
       // console.log('isCollapse' + this.$store.state.tab.collapseMenu)
       return this.$store.state.tab.isCollapse;
     },
+    asyncMenu() {
+      return this.$store.state.tab.menu
+    }
   },
 };
 </script>

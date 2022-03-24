@@ -1,3 +1,6 @@
+
+import Cookie from "js-cookie"
+
 export default {
     state: {
         isCollapse: false,
@@ -9,7 +12,8 @@ export default {
                 icon: 'home'
             }
         ],
-        currentMenu: null
+        currentMenu: null,
+        menu: []
     },
     mutations: {
         collapseMenu(state) {
@@ -29,6 +33,39 @@ export default {
         closeTag(state, val) {
             const result = state.tabsList.findIndex(item => item.name === val.name)
             state.tabsList.splice(result, 1)
+        },
+        setMenu(state, val) {
+            state.menu = val
+            Cookie.set('menu', JSON.stringify(val))
+        },
+        cleanMenu(state) {
+            state.menu = []
+            Cookie.remove('menu')
+        },
+        addMenu(state, router) {
+            if (!Cookie.get('menu')) {
+                return
+            }
+            const menu = JSON.parse(Cookie.get('menu'))
+            state.menu = menu
+            const menuArray = []
+            menu.forEach(item => {
+                if (item.children) {
+                    item.children = item.children.map(item => {
+                        item.component = () => import(`../views/${item.url}`)
+                        return item
+                    })
+                    menuArray.push(...item.children)
+                } else {
+                    item.component = () => import(`../views/${item.url}`)
+                    menuArray.push(item)
+                }
+            });
+            console.log(menuArray,'menuArray')
+            // 路由的动态添加
+            menuArray.forEach(item => {
+                router.addRoute('MainView', item)
+            })
         }
 
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="common-table">
-    <el-table :data="tableData" height="90%" :stripe="true">
+    <el-table :data="tableData" height="90%" stripe>
       <el-table-column
         show-overflow-tooltip
         v-for="item in tableLabel"
@@ -9,21 +9,23 @@
         :width="item.width ? item.width : 125"
       >
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope }}</span>
+          <span style="margin-left: 10px">{{ scope.row[item.prop] }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" min-width="180">
-        <el-button size="mini" @click="handleEdit">编辑</el-button>
-        <el-button size="mini" type="danger" @click="handleDelete"
-          >删除</el-button
-        >
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)"
+            >删除</el-button
+          >
+        </template>
       </el-table-column>
     </el-table>
     <!-- 分页 -->
     <el-pagination
       class="pager"
       layout="prev,pager,next"
-      :total="this.config.total ? 200 : this.config.total"
+      :total="this.config.total"
       :current-page.sync="this.config.page"
       @current-change="changePage"
       :page-size="20"
@@ -40,42 +42,42 @@ export default {
     myConfig: Object,
   },
   watch: {
-      config: {
-          handler: function() {
-              console.log(this.config, 'config')
-          },
-          deep:true,
-          immediate:true
-      }
+    config: {
+      handler: function () {
+        console.log(this.config, "config");
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   data() {
     return {
-        config: this.myConfig
+      config: this.myConfig,
     };
   },
   methods: {
     handleEdit(row) {
-        this.$emit('edit', row)
+      this.$emit("edit", row);
     },
     handleDelete(row) {
-        this.$emit('del', row)
+      this.$emit("del", row);
     },
     changePage(row) {
-        this.$emit('change', row)
-    }
+      this.$emit("change", row);
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 .common-table {
-    height: calc(100% - 62px);
-    background-color: #fff;
-    position: relative;
-    .pager {
-        position: absolute;
-        bottom: 0;
-        right: 20px;
-    }
+  height: 100%;
+  background-color: #fff;
+  position: relative;
+  .pager {
+    position: absolute;
+    bottom: -100px;
+    right: 20px;
+  }
 }
 </style>

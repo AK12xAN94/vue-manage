@@ -58,9 +58,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-form-item {
+.el-form {
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  .el-form-item {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
 }
 </style>

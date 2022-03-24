@@ -23,3 +23,11 @@ export const getUser = (params) => {
         params
     })
 }
+
+export const delUser = (params) => {
+    return axios.request({
+        url: '/user/delUser',
+        method: 'get',
+        params
+    })
+}
