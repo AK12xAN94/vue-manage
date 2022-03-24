@@ -37,6 +37,7 @@ new Vue({
   router,
   store,
   created() {
+    // 刷新浏览器时重新加载路由
     store.commit('addMenu', router)
   },
 }).$mount('#app')
