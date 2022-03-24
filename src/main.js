@@ -21,7 +21,6 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   store.commit('getToken')
   const token = store.state.user.token
-
   if (!token && to.name !== 'login') {
     next({ name: 'login' })
   } else if (token && to.name === 'login') {
@@ -29,7 +28,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-
 })
 
 new Vue({
