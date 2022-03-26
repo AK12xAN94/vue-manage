@@ -1,6 +1,6 @@
 # 通用项目管理后台，vue-manage
 
-![项目技术栈](G:\BaiduNetdiskDownload\B站通用管理后台资料\images\8.png)
+![项目技术栈](./src/assets/8.png)
 
 使用到的库：
 ```json
