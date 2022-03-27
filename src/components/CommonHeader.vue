@@ -31,8 +31,7 @@
 </template>
 
 <script>
-
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "CommonHeader",
@@ -42,21 +41,21 @@ export default {
     };
   },
   methods: {
-      handleMenu() {
-        //   console.log(this.$store.state.tab.collapseMenu)
-          this.$store.commit('collapseMenu')
-      },
-      logout() {
-        this.$store.commit('clearToken')
-        this.$store.commit('clearMenu')
-        this.$router.push('/login')
-      }
+    handleMenu() {
+      //   console.log(this.$store.state.tab.collapseMenu)
+      this.$store.commit("collapseMenu");
+    },
+    logout() {
+      this.$store.commit("clearToken");
+      this.$store.commit("clearMenu");
+      this.$router.push("/login");
+    },
   },
   computed: {
     ...mapState({
-      tags: state => state.tab.tabsList
-    })
-  }
+      tags: (state) => state.tab.tabsList,
+    }),
+  },
 };
 </script>
 
