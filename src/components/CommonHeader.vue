@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     handleMenu() {
-      //   console.log(this.$store.state.tab.collapseMenu)
       this.$store.commit("collapseMenu");
     },
     logout() {

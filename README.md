@@ -98,7 +98,7 @@ addMenu(state, router) {
 - 主体区域
 
 侧边栏的展开和最小化涉及兄弟组件间的通信，项目使用vuex来实现状态管理
-```js
+```jss
 // 总共有两个模块
 export default new Vuex.Store({
     modules: {
@@ -109,9 +109,13 @@ export default new Vuex.Store({
 ```
 每个模块下用state存储状态，使用mutations修改状态
 
+#### 面包屑实现
+面包屑是在head部分组件里,Tag标签虽然不再head部分组件里,但是它在整个管理后台系统中是会一直存在的，所以需要在Main.vue中。
+
+这两块功能的实现,主要依赖Element-ui两个样式 Breadcrumb 面包屑 + Tag 标签
 
 
-
+整个大致逻辑是这样的,首先是面包屑首页一定要存在的,接下来在侧边组件点击某菜单,把tabsList存到vuex中，在Tag中点击或关闭标签会对tabsList数组进行增加或删除路由对象元素，然后在头部组件来获取vuex中这个数据并展示。
 
 #### 封装通用组件
 - CommonAside
